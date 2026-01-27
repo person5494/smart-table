@@ -42,11 +42,10 @@ function render(action) {
     let result = [...data]; // копируем для последующего изменения
     // @todo: использование
 
-    result = applyPagination(result, state, action);
-    result = applySorting(result, state, action);
-    result = applyFiltering(result, state, action);
-    //это(строчка ниже) добавил я для поиска, если это будет нужно.
     result = applySearching(result, state, action);
+    result = applyFiltering(result, state, action);
+    result = applySorting(result, state, action);
+    result = applyPagination(result, state, action);
 
     sampleTable.render(result)
 }
@@ -82,7 +81,6 @@ const applyFiltering = initFiltering(sampleTable.filter.elements, {    // пер
     searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
 });
 
-//эту переменную добавил я для поиска, если она будет нужна.
 const applySearching = initSearching('search');
 
 const appRoot = document.querySelector('#app');
