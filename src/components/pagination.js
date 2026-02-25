@@ -60,15 +60,15 @@ export const initPagination = ({pages, fromRow, toRow, totalRows}, createPage) =
         pageCount = Math.ceil(total / limit);
 
         // переносим код, который делали под @todo: #2.4
-    const visiblePages = getPages(page, pageCount, 5);                // Получим массив страниц, которые нужно показать, выводим только 5 страниц
-    pages.replaceChildren(...visiblePages.map(pageNumber => {        // перебираем их и создаём для них кнопку
-        const el = pageTemplate.cloneNode(true);                    // клонируем шаблон, который запомнили ранее
-        return createPage(el, pageNumber, pageNumber === page);        // вызываем колбэк из настроек, чтобы заполнить кнопку данными
-    }))
+        const visiblePages = getPages(page, pageCount, 5);                // Получим массив страниц, которые нужно показать, выводим только 5 страниц
+        pages.replaceChildren(...visiblePages.map(pageNumber => {        // перебираем их и создаём для них кнопку
+            const el = pageTemplate.cloneNode(true);                    // клонируем шаблон, который запомнили ранее
+            return createPage(el, pageNumber, pageNumber === page);        // вызываем колбэк из настроек, чтобы заполнить кнопку данными
+        }))
         // переносим код, который делали под @todo: #2.5 (обратите внимание, что rowsPerPage заменена на limit)
-    fromRow.textContent = (page - 1) * limit + 1;                    // С какой строки выводим
-    toRow.textContent = Math.min((page * limit), data.length);    // До какой строки выводим, если это последняя страница, то отображаем оставшееся количество
-    totalRows.textContent = data.length;                                // Сколько всего строк выводим на всех страницах вместе (после фильтрации будет меньше)
+        fromRow.textContent = (page - 1) * limit + 1;                    // С какой строки выводим
+        toRow.textContent = Math.min((page * limit), total);    // До какой строки выводим, если это последняя страница, то отображаем оставшееся количество
+        totalRows.textContent = total;                                // Сколько всего строк выводим на всех страницах вместе (после фильтрации будет меньше)
     }
 
     return {
