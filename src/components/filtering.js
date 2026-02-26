@@ -37,7 +37,21 @@ export function initFiltering(elements) {
 
     const applyFiltering = (query, state, action) => {
         // код с обработкой очистки поля
+        const filtersContainer = document.querySelector('.filter-row');
 
+        filtersContainer.addEventListener('click', async (event) => {
+            const button = event.target.closest('button');
+            if (!button) return;
+            if (button.name !== 'clear') return;
+            const label = button.closest('label');
+            const input = label.querySelector('input');
+            if (input) input.value = '';
+            const field = button.dataset.field;
+            if (field && field in state) {
+                state[field] = '';
+            }
+            await render();
+        });
         // @todo: #4.5 — отфильтровать данные, используя компаратор
         const filter = {};
         Object.keys(elements).forEach(key => {
