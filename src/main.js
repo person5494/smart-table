@@ -42,7 +42,7 @@ async function render(action) {
     let state = collectState(); // состояние полей из таблицы
     let query = {}; // здесь будут формироваться параметры запроса
     // другие apply*
-    // result = applySearching(result, state, action);
+    query = applySearching(query, state, action); // result заменяем на query
     query = applyFiltering(query, state, action); // result заменяем на query
     // result = applySorting(result, state, action);
     query = applyPagination(query, state, action); // обновляем query
