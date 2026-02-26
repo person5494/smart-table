@@ -41,7 +41,7 @@ return {                                            // расширьте сущ
 async function render(action) {
     let state = collectState(); // состояние полей из таблицы
     let query = {}; // здесь будут формироваться параметры запроса
-    // другие apply*
+    
     query = applySearching(query, state, action); // result заменяем на query
     query = applyFiltering(query, state, action); // result заменяем на query
     query = applySorting(query, state, action); // result заменяем на query
@@ -80,10 +80,7 @@ const applySorting = initSorting([        // Нам нужно передать 
     sampleTable.header.elements.sortByTotal
 ]);
 
-const {applyFiltering, updateIndexes} = initFiltering(
-    sampleTable.filter.elements, {                                     // передаём элементы фильтра
-    // searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
-});
+const {applyFiltering, updateIndexes} = initFiltering(sampleTable.filter.elements);
 
 const applySearching = initSearching('search');
 
